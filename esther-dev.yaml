@@ -25,6 +25,9 @@ metadata:
 spec:
   region: ap-south-1
   sshKeyName: esther
+  networkSpec:
+    vpc:
+      availabilityZoneUsageLimit: 1
 ---
 apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
 kind: KubeadmControlPlane
