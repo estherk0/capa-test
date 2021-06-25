@@ -1,7 +1,7 @@
 apiVersion: cluster.x-k8s.io/v1alpha3
 kind: Cluster
 metadata:
-  name: esther-dev
+  name: minimal
   namespace: default
 spec:
   clusterNetwork:
@@ -11,16 +11,16 @@ spec:
   controlPlaneRef:
     apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
     kind: KubeadmControlPlane
-    name: esther-dev-control-plane
+    name: minimal-control-plane
   infrastructureRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
     kind: AWSCluster
-    name: esther-dev
+    name: minimal
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
 kind: AWSCluster
 metadata:
-  name: esther-dev
+  name: minimal
   namespace: default
 spec:
   region: ap-south-1
@@ -32,13 +32,13 @@ spec:
 apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
 kind: KubeadmControlPlane
 metadata:
-  name: esther-dev-control-plane
+  name: minimal-control-plane
   namespace: default
 spec:
   infrastructureTemplate:
     apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
     kind: AWSMachineTemplate
-    name: esther-dev-control-plane
+    name: minimal-control-plane
   kubeadmConfigSpec:
     clusterConfiguration:
       apiServer:
@@ -63,7 +63,7 @@ spec:
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
 kind: AWSMachineTemplate
 metadata:
-  name: esther-dev-control-plane
+  name: minimal-control-plane
   namespace: default
 spec:
   template:
@@ -75,10 +75,10 @@ spec:
 apiVersion: cluster.x-k8s.io/v1alpha3
 kind: MachineDeployment
 metadata:
-  name: esther-dev-md-0
+  name: minimal-md-0
   namespace: default
 spec:
-  clusterName: esther-dev
+  clusterName: minimal
   replicas: 1
   selector:
     matchLabels: null
@@ -88,18 +88,18 @@ spec:
         configRef:
           apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
           kind: KubeadmConfigTemplate
-          name: esther-dev-md-0
-      clusterName: esther-dev
+          name: minimal-md-0
+      clusterName: minimal
       infrastructureRef:
         apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
         kind: AWSMachineTemplate
-        name: esther-dev-md-0
+        name: minimal-md-0
       version: v1.18.16
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1alpha3
 kind: AWSMachineTemplate
 metadata:
-  name: esther-dev-md-0
+  name: minimal-md-0
   namespace: default
 spec:
   template:
@@ -111,7 +111,7 @@ spec:
 apiVersion: bootstrap.cluster.x-k8s.io/v1alpha3
 kind: KubeadmConfigTemplate
 metadata:
-  name: esther-dev-md-0
+  name: minimal-md-0
   namespace: default
 spec:
   template:
